@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>My Portfolio</title>
+    <style>
+        :root {
+            --navy: #001f3f;
+            --navy-light: #0a3d7a;
+            --white: #f8f9fa;
+            --accent: #4da6ff;
+            --gray: #6c757d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--white);
+            color: #333;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar Styles */
+        header {
+            background-color: var(--navy);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 5%;
+            max-width: 120000px;
+            margin: 0 auto;
+        }
+
+        .logo,
+        .logo1 {
+            color: var(--white);
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: inline-block;
+            line-height: 1.5;
+            padding: 0;
+            height: auto;
+            vertical-align: middle;
+            margin-top: 0;
+        }
+
+        .logo:hover {
+            color: var(--accent);
+            transform: scale(1.05);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            bottom: 0;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            cursor: pointer;
+        }
+
+        .hamburger div {
+            width: 25px;
+            height: 3px;
+            background-color: var(--white);
+            margin: 5px;
+            transition: all 0.3s ease;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 5%;
+            background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+            color: var(--white);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero h1 span {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--accent);
+            animation: typing 3.5s steps(40, end) forwards 0.3s, blink-caret 0.75s step-end infinite 0.3s;
+            max-width: 0;
+        }
+
+        @keyframes typing {
+            from {
+                max-width: 0;
+                opacity: 1;
+            }
+
+            to {
+                max-width: 100%;
+                opacity: 1;
+            }
+        }
+
+        }
+
+        @keyframes blink-caret {
+
+            from,
+            to {
+                border-color: transparent
+            }
+
+            50% {
+                border-color: var(--accent);
+            }
+        }
+
+        .hero-btn {
+            display: inline-block;
+            background-color: var(--accent);
+            color: var(--white);
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards 0.6s;
+        }
+
+        .hero-btn:hover {
+            background-color: var(--white);
+            color: var(--navy);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .section {
+            padding: 6rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--navy);
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: var(--accent);
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .about-img {
+            flex: 1;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+        }
+
+        .about-img:hover {
+            transform: translateY(-10px);
+        }
+
+        .about-img img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: all 0.5s ease;
+        }
+
+        .about-img:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-text {
+            flex: 1;
+        }
+
+        .about-text h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--navy);
+        }
+
+        .about-text p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .skill {
+            background-color: var(--navy);
+            color: var(--white);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .skill:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .education-content {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        margin-bottom: 3rem;
+            }
+
+        .education-img {
+        flex: none;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: all 0.5s ease;
+        max-width: 150px;
+        margin: 0 auto;
+        }
+
+        .education-img:hover {
+        transform: translateY(-10px);
+        }
+
+        .education-img img {
+        width: 100px;
+        height: auto;
+        display: block;
+        transition: all 0.5s ease;
+        }
+
+        .education-img:hover img {
+        transform: scale(1.05);
+        }
+
+        .education-text {
+        flex: 1;
+        }
+
+        .education-text h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--navy);
+        position: relative;
+        display: inline-block;
+        }
+
+        .education-text p {
+        font-style: italic;
+        color: var(--gray);
+        font-size: 1.1rem;
+        }
+
+        .organization-content {
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        max-width: 1200px;
+        margin: 0 auto;
+        margin-bottom: 3rem;
+            }
+
+        .organization-img {
+        flex: none;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: all 0.5s ease;
+        max-width: 150px;
+        margin: 0 auto;
+        }
+
+        .organization-img:hover {
+        transform: translateY(-10px);
+        }
+
+        .organization-img img {
+        width: 100px;
+        height: auto;
+        display: block;
+        transition: all 0.5s ease;
+        }
+
+        .organization-img:hover img {
+        transform: scale(1.05);
+        }
+
+        .organization-text {
+        flex: 1;
+        }
+
+        .organization-text h3 {
+        font-size: 1.8rem;
+        font-weight: 700;
+        margin-bottom: 1rem;
+        color: var(--navy);
+        position: relative;
+        display: inline-block;
+        }
+
+        .organization-text p {
+        font-style: italic;
+        color: var(--gray);
+        font-size: 1.1rem;
+        }
+
+        /* Business Projects Section */
+        .business-projects-content {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .business-item {
+            text-align: center;
+            max-width: 300px;
+        }
+
+        .business-item img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .business-item img:hover {
+            transform: scale(1.05);
+        }
+
+        .business-item h3 {
+            font-size: 1.5rem;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+        }
+
+
+        /* Portfolio Section */
+        .portfolio {
+            background-color: #f8f9fa;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .portfolio-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.5s ease;
+            background-color: white;
+        }
+
+        .portfolio-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .portfolio-img {
+            height: 200px;
+            overflow: hidden;
+        }
+
+        .image-container {
+            display: flex;
+            width: 500%; /* 5 images, so 500% width */
+            height: 100%;
+            transition: transform 0.5s ease;
+        }
+
+        .image-container img {
+            width: 20%; /* Each image takes 20% of the container width */
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .portfolio-item:hover .image-container {
+            transform: translateX(-20%); /* Slide to show the second image */
+        }
+
+        .portfolio-info {
+            padding: 1.5rem;
+        }
+
+        .portfolio-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: var(--navy);
+        }
+
+        .portfolio-info p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .portfolio-tags span {
+            display: inline-block;
+            background-color: var(--navy-light);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .portfolio-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .portfolio-link:hover {
+            color: var(--navy);
+        }
+
+        /* Contact Section */
+        .contact {
+            background-color: var(--navy);
+            color: var(--white);
+        }
+
+        .contact h2,
+        .contact h3 {
+            color: var(--white);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 1.5rem;
+            opacity: 0.9;
+        }
+
+        .contact-details {
+            margin-top: 2rem;
+        }
+
+        .contact-detail {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .contact-detail i {
+            margin-right: 1rem;
+            color: var(--accent);
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 1rem;
+            margin-bottom: 1rem;
+            border: none;
+            border-radius: 5px;
+            background-color: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+        }
+
+        .contact-form textarea {
+            height: 150px;
+            resize: none;
+        }
+
+        .contact-form button {
+            background-color: var(--accent);
+            color: var(--white);
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .contact-form button:hover {
+            background-color: var(--white);
+            color: var(--navy);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--navy-light);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--navy);
+            color: var(--white);
+            border-radius: 50%;
+            margin: 0 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+
+        /* Dropdown Menu Styles */
+        .dropdown {
+            position: relative;
+        }
+
+        .dropbtn {
+            cursor: pointer;
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 500;
+            padding: 0.5rem 0;
+            display: inline-block;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: var(--navy);
+            min-width: 180px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            border-radius: 5px;
+            z-index: 1001;
+            top: 40px;
+            /* Moved slightly up to align with other nav items */
+            left: 0;
+        }
+
+        .dropdown-content li {
+            margin: 0;
+        }
+
+        .dropdown-content li a {
+            color: var(--white);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .dropdown-content li a:hover {
+            background-color: var(--accent);
+            color: var(--navy);
+        }
+
+        /* Show dropdown on hover for desktop */
+        @media (min-width: 769px) {
+            .dropdown:hover .dropdown-content {
+                display: block;
+            }
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 1rem 5%;
+            }
+
+            .nav-links {
+                position: absolute;
+                right: -100%;
+                top: 70px;
+                width: 50%;
+                height: calc(100vh - 70px);
+                background-color: var(--navy);
+                flex-direction: column;
+                align-items: center;
+                padding: 2rem 0;
+                transition: all 0.5s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                margin: 1rem 0;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active div:nth-child(1) {
+                transform: rotate(-45deg) translate(-5px, 6px);
+            }
+
+            .hamburger.active div:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active div:nth-child(3) {
+                transform: rotate(45deg) translate(-5px, -6px);
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+                white-space: normal;
+                border-right: none;
+                animation: fadeInUp 1s ease forwards 0.3s;
+                max-width: none;
+            }
+
+            .about-content {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <nav class="navbar">
+            <a href="#" class="logo">My<span>Portfolio</span></a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#organization">Organization</a></li>
+                <li><a href="#portfolio">Portfolio</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="hamburger">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <h1>Hi, I'm <span>Muansais</span></h1>
+            <p>English Teacher, IT Support, IT Network, Photographer, Videographer, Designer, and Student</p>
+            <a href="#portfolio" class="hero-btn">View My Work</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section" id="about">
+        <div class="section-title">
+            <h2>About Me</h2>
+        </div>
+        <div class="about-content">
+            <div class="about-img animate delay-1">
+                <img src="m.jpg"
+                    alt="Professional headshot of a web developer in a casual setting, wearing glasses and smiling" />
+            </div>
+            <div class="about-text animate delay-2">
+                <h3>Muansais</h3>
+                <p> Hello, I am an English teacher at SMP AL-AZHAR Pohjentrek. I am confident and creative, highly
+                    motivated, independent, and experienced in other fields, namely media and digital. I am oriented in
+                    the field of Network and Computer, and have a deep understanding of Photography, Videography, and
+                    the latest technology. I have a "get it done" attitude without sacrificing quality. I am a hard
+                    worker and ambitious with a high level of curiosity.</p>
+                <p>On the other hand, I also work freelance as a driver, graphic designer, photographer, videographer,
+                    and have some knowledge of the world of web development. Every day, I'm busy teaching, managing
+                    networks, and learning.</p>
+
+                <div class="skills">
+                    <span class="skill">Teaching</span>
+                    <span class="skill">Ms. Office</span>
+                    <span class="skill">Photo Shop</span>
+                    <span class="skill">Corel Draw</span>
+                    <span class="skill">Network Engineering</span>
+                    <span class="skill">Computer Engineering</span>
+                    <span class="skill">Management</span>
+                    <span class="skill">Web Development</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<!-- Education Section -->
+<section class="section education" id="education">
+    <div class="section-title">
+        <h2>Education</h2>
+    </div>
+    <div class="education-content">
+        <div class="education-img animate delay-1">
+            <img src="skensa.png" alt="Education related image" />
+        </div>
+        <div class="education-text animate delay-2">
+            <h3>SMK Negeri 1 Pasuruan / Teknik Komputer Jaringan</h3>
+            <p><em>Graduated in Computer Science, focusing on network engineering and digital media.</em></p>
+        </div>
+    </div>
+
+    <div class="education-content">
+        <div class="education-img animate delay-3">
+            <img src="uniwara.jpeg" alt="University image" />
+        </div>
+        <div class="education-text animate delay-4">
+            <h3>Uniwara University / English Education </h3>
+            <p><em>Graduated with a Bachelor's in English Education from Uniwara University.</em></p>
+        </div>
+    </div>
+</section>
+
+<!-- Organization Section -->
+<section class="section organization" id="organization">
+    <div class="section-title">
+        <h2>Organization</h2>
+    </div>
+    <div class="organization-content">
+        <div class="organization-img animate delay-1">
+            <img src="esa.jpeg" alt="Organization related image" />
+        </div>
+        <div class="organization-text animate delay-2">
+            <h3>English Student Association (ESA) </h3>
+            <p><em>as a Media of English</em></p>
+        </div>
+    </div>
+
+    <div class="organization-content">
+        <div class="organization-img animate delay-3">
+            <img src="mapaladewa.jpg" alt="Organization image" />
+        </div>
+        <div class="organization-text animate delay-4">
+            <h3>Mahasiswa Pecinta Alam Ki Hajar Dewantara (Mapaladewa)</h3>
+            <p><em>as a Inventory</em></p>
+        </div>
+    </div>
+
+    <div class="organization-content">
+        <div class="organization-img animate delay-5">
+            <img src="bem.jpg" alt="BEM Uniawara image" />
+        </div>
+        <div class="organization-text animate delay-6">
+            <h3>Badan Ekesekutif Mahasiswa Uniawara (BEM Uniwara)</h3>
+            <p><em>as a Ministry of Home Affairs</em></p>
+        </div>
+    </div>
+</section>
+
+    <!-- Portfolio Section -->
+    <section class="section portfolio" id="portfolio">
+        <div class="section-title">
+            <h2>My Portfolio</h2>
+        </div>
+        <div class="portfolio-grid">
+            <!-- Project 1 -->
+            <div class="portfolio-item animate delay-1">
+                <div class="portfolio-img">
+                    <div class="image-container">
+                        <img src="guru1.jpeg" alt="Image 1">
+                        <img src="guru2.jpeg" alt="Image 2">
+                        <img src="fg3.jpeg" alt="Image 3">
+                        <img src="uniwara.jpeg" alt="Image 4">
+                        <img src="videografi.jpg" alt="Image 5">
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Teaching</h3>
+                    <p>English Teacher and Religion Teacher
+                    </p>
+                    <div class="portfolio-tags">
+                        <span>English</span>
+                        <span>Education</span>
+                        <span>Classroom</span>
+                    </div>
+                    <a href="#" class="portfolio-link">View Project</a>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="portfolio-item animate delay-2">
+                <div class="portfolio-img">
+                    <div class="image-container">
+                        <img src="gd1 (1).jpeg" alt="Image 1">
+                        <img src="gd1 (2).jpeg" alt="Image 2">
+                        <img src="network-support.jpeg" alt="Image 3">
+                        <img src="videografi.jpg" alt="Image 4">
+                        <img src="m.jpg" alt="Image 5">
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Graphic Design </h3>
+                    <p>Make your graphic here</p>
+                    <div class="portfolio-tags">
+                        <span>Figma</span>
+                        <span>UI Design</span>
+                        <span>Prototyping</span>
+                    </div>
+                    <a href="#" class="portfolio-link">View Project</a>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="portfolio-item animate delay-3">
+                <div class="portfolio-img">
+                    <div class="image-container">
+                        <img src="fg1.jpeg" alt="Image 1">
+                        <img src="fg3.jpeg" alt="Image 2">
+                        <img src="gd.jpeg" alt="Image 3">
+                        <img src="m.jpg" alt="Image 4">
+                        <img src="network-support.jpeg" alt="Image 5">
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Photography</h3>
+                    <p>A productivity application for teams to organize, prioritize, and track work progress.</p>
+                    <div class="portfolio-tags">
+                        <span>Vue.js</span>
+                        <span>Firebase</span>
+                        <span>SCSS</span>
+                    </div>
+                    <a href="#" class="portfolio-link">View Project</a>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="portfolio-item animate delay-4">
+                <div class="portfolio-img">
+                    <div class="image-container">
+                        <img src="network-support.jpeg" alt="Image 1">
+                        <img src="gd.jpeg" alt="Image 2">
+                        <img src="photography.jpeg" alt="Image 3">
+                        <img src="videografi.jpg" alt="Image 4">
+                        <img src="m.jpg" alt="Image 5">
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>IT Network/IT Support</h3>
+                    <p>Experienced in network engineering and IT support, managing computer systems and infrastructure.</p>
+                    <div class="portfolio-tags">
+                        <span>Network Engineering</span>
+                        <span>Computer Engineering</span>
+                        <span>Management</span>
+                    </div>
+                    <a href="#" class="portfolio-link">View Project</a>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="portfolio-item animate delay-5">
+                <div class="portfolio-img">
+                    <div class="image-container">
+                        <img src="videografi.jpg" alt="Image 1">
+                        <img src="photography.jpeg" alt="Image 2">
+                        <img src="gd.jpeg" alt="Image 3">
+                        <img src="network-support.jpeg" alt="Image 4">
+                        <img src="m.jpg" alt="Image 5">
+                    </div>
+                </div>
+                <div class="portfolio-info">
+                    <h3>Videography</h3>
+                    <p>Skilled in videography, creating engaging video content for various purposes.</p>
+                    <div class="portfolio-tags">
+                        <span>Videography</span>
+                        <span>Photography</span>
+                        <span>Media</span>
+                    </div>
+                    <a href="#" class="portfolio-link">View Project</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="section contact" id="contact">
+        <div class="section-title">
+            <h2>Get In Touch</h2>
+        </div>
+        <div class="contact-container">
+            <div class="contact-info animate delay-1">
+                <h3>Contact Information</h3>
+                <p>Feel free to reach out for collaborations or just a friendly hello!</p>
+
+                <div class="contact-details">
+                    <div class="contact-detail">
+                        <i class="fas fa-envelope"></i>
+                        <span>muhamadaniq23@gmail.com</span>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-phone"></i>
+                        <span>+62 895 1438 3733 </span>
+                    </div>
+                    <div class="contact-detail">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Pasuruan, ID</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="contact-form animate delay-2">
+                <form>
+                    <input type="text" placeholder="Your Name" required>
+                    <input type="email" placeholder="Your Email" required>
+                    <input type="text" placeholder="Subject">
+                    <textarea placeholder="Your Message"></textarea>
+                    <button type="submit">Send Message</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="social-links">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+        </div>
+        <p>&copy; 2025 My Portfolio. All rights reserved.</p>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+        });
+
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate');
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+
+        document.querySelectorAll('.animate').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                target.scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Dropdown toggle for mobile
+        const dropbtn = document.querySelector('.dropbtn');
+        const dropdownContent = document.querySelector('.dropdown-content');
+
+        dropbtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!dropbtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+                dropdownContent.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
