@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>My Portfolio</title>
+    <!-- Font Awesome CDN for social icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         :root {
             --navy: #001f3f;
@@ -26,6 +28,8 @@
             color: #333;
             line-height: 1.6;
             overflow-x: hidden;
+            /* offset for fixed header */
+            padding-top: 70px;
         }
 
         /* Navbar Styles */
@@ -35,27 +39,29 @@
             top: 0;
             width: 100%;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            height: 70px;
         }
 
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 1.5rem 5%;
-            max-width: 120000px;
+            padding: 0 5%;
+            max-width: 1200px;
+            height: 70px;
             margin: 0 auto;
         }
 
         .logo,
         .logo1 {
             color: var(--white);
-            font-size: 1.8rem;
+            font-size: 1.4rem;
             font-weight: 700;
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             display: inline-block;
-            line-height: 1.5;
+            line-height: 1;
             padding: 0;
             height: auto;
             vertical-align: middle;
@@ -119,7 +125,8 @@
 
         /* Hero Section */
         .hero {
-            height: 100vh;
+            height: 80vh;
+            min-height: 520px;
             display: flex;
             align-items: center;
             padding: 0 5%;
@@ -130,8 +137,9 @@
         }
 
         .hero-content {
-            max-width: 800px;
+            max-width: 900px;
             z-index: 1;
+            margin-left: 5%;
         }
 
         .hero h1 {
@@ -169,8 +177,6 @@
             }
         }
 
-        }
-
         @keyframes blink-caret {
 
             from,
@@ -206,9 +212,10 @@
 
         /* About Section */
         .section {
-            padding: 6rem 5%;
-            max-width: 1200px;
+            padding: 4.5rem 5%;
+            max-width: 1100px;
             margin: 0 auto;
+            scroll-margin-top: 90px; /* ensures anchors are not hidden under fixed header */
         }
 
         .section-title {
@@ -445,16 +452,20 @@
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.5rem;
+            align-items: start;
         }
 
         .portfolio-item {
             border-radius: 10px;
             overflow: hidden;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.5s ease;
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
             background-color: white;
+            min-height: 280px;
+            display: flex;
+            flex-direction: column;
         }
 
         .portfolio-item:hover {
@@ -463,7 +474,7 @@
         }
 
         .portfolio-img {
-            height: 200px;
+            height: 180px;
             overflow: hidden;
         }
 
@@ -485,7 +496,11 @@
         }
 
         .portfolio-info {
-            padding: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
         .portfolio-info h3 {
@@ -520,6 +535,45 @@
         }
 
         .portfolio-link:hover {
+            color: var(--navy);
+        }
+
+        /* Layout tweaks for text-only project items (e.g. Videography) */
+        .portfolio-item--text {
+            min-height: 180px; /* smaller height for text-only card */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .portfolio-item--text .portfolio-info {
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .project-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+
+        .project-links a.portfolio-project-link {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: var(--navy);
+            color: var(--white);
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1rem;
+            transition: background 0.2s ease, transform 0.12s ease;
+        }
+
+        .project-links a.portfolio-project-link:hover {
+            background: var(--accent);
+            transform: translateY(-3px);
             color: var(--navy);
         }
 
@@ -601,70 +655,85 @@
 
         /* Footer */
         footer {
-            background-color: var(--navy-light);
+            background: var(--navy);
             color: var(--white);
             text-align: center;
-            padding: 2rem 0;
+            padding: 3rem 0;
+            position: relative;
         }
 
         .social-links {
             display: flex;
             justify-content: center;
-            margin-bottom: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .social-links a {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             background-color: var(--navy);
             color: var(--white);
             border-radius: 50%;
-            margin: 0 0.5rem;
+            margin: 0 0.75rem;
             transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-decoration: none;
         }
 
         .social-links a:hover {
             background-color: var(--accent);
-            transform: translateY(-3px);
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
         }
 
         /* Animations */
         @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
         }
 
-        .animate {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: fadeInUp 1s ease forwards;
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-20px); }
+            to   { opacity: 1; transform: translateX(0); }
         }
 
-        .delay-1 {
-            animation-delay: 0.2s;
+        @keyframes pop {
+            0% { transform: scale(0.96); opacity: 0; }
+            60% { transform: scale(1.02); opacity: 1; }
+            100% { transform: scale(1); opacity: 1; }
         }
 
-        .delay-2 {
-            animation-delay: 0.4s;
-        }
+        /* Utility animation classes applied when element becomes visible */
+        .anim-fade-up { opacity: 0; transform: translateY(20px); }
+        .anim-fade-left { opacity: 0; transform: translateX(-20px); }
+        .anim-pop { opacity: 0; transform: scale(0.98); }
 
-        .delay-3 {
-            animation-delay: 0.6s;
-        }
+        .is-visible.anim-fade-up { animation: fadeInUp 0.8s cubic-bezier(.2,.9,.2,1) forwards; }
+        .is-visible.anim-fade-left { animation: fadeInLeft 0.8s cubic-bezier(.2,.9,.2,1) forwards; }
+        .is-visible.anim-pop { animation: pop 0.5s cubic-bezier(.2,.9,.2,1) forwards; }
 
-        .delay-4 {
-            animation-delay: 0.8s;
-        }
+        /* Stagger container: children with data-stagger will animate in sequence */
+        .stagger > * { opacity: 0; transform: translateY(8px); }
+        .stagger.is-visible > * { animation: fadeInUp 0.6s cubic-bezier(.2,.9,.2,1) forwards; }
+        .stagger.is-visible > *:nth-child(1) { animation-delay: 0.08s; }
+        .stagger.is-visible > *:nth-child(2) { animation-delay: 0.16s; }
+        .stagger.is-visible > *:nth-child(3) { animation-delay: 0.24s; }
+        .stagger.is-visible > *:nth-child(4) { animation-delay: 0.32s; }
+
+        /* Card hover polish */
+        .portfolio-item { will-change: transform, box-shadow; }
+        .portfolio-item img { transition: transform 0.45s ease; }
+        .portfolio-item:hover img { transform: scale(1.06); }
+
+        /* Micro interactions for links */
+        a.portfolio-link, a.portfolio-project-link { transition: transform 0.12s ease, box-shadow 0.12s ease; }
+        a.portfolio-project-link:active { transform: translateY(1px) scale(0.995); }
+
+        /* Subtle background stripe for sections to create visual separation */
+        .section--alt { background: linear-gradient(180deg, rgba(0,0,0,0.02), transparent); }
 
         /* Dropdown Menu Styles */
         .dropdown {
@@ -720,62 +789,44 @@
 
         /* Responsive Styles */
         @media (max-width: 768px) {
-            .navbar {
-                padding: 1rem 5%;
-            }
+            .navbar { padding: 0 1rem; }
 
+            /* Full-screen mobile menu overlay */
             .nav-links {
-                position: absolute;
+                position: fixed;
                 right: -100%;
                 top: 70px;
-                width: 50%;
+                left: 0;
+                width: 100%;
                 height: calc(100vh - 70px);
                 background-color: var(--navy);
                 flex-direction: column;
                 align-items: center;
-                padding: 2rem 0;
-                transition: all 0.5s ease;
+                padding: 2.5rem 1.5rem;
+                transition: right 0.35s cubic-bezier(.2,.9,.2,1);
             }
 
-            .nav-links.active {
-                right: 0;
-            }
+            .nav-links.active { right: 0; }
 
-            .nav-links li {
-                margin: 1rem 0;
-            }
+            .nav-links li { margin: 1.1rem 0; }
 
-            .hamburger {
-                display: block;
-            }
+            .hamburger { display: block; }
 
-            .hamburger.active div:nth-child(1) {
-                transform: rotate(-45deg) translate(-5px, 6px);
-            }
+            .hamburger.active div:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+            .hamburger.active div:nth-child(2) { opacity: 0; }
+            .hamburger.active div:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
 
-            .hamburger.active div:nth-child(2) {
-                opacity: 0;
-            }
-
-            .hamburger.active div:nth-child(3) {
-                transform: rotate(45deg) translate(-5px, -6px);
-            }
-
-            .hero h1 {
-                font-size: 2.5rem;
-            }
+            .hero h1 { font-size: 2.25rem; }
 
             .hero p {
                 font-size: 1rem;
                 white-space: normal;
                 border-right: none;
-                animation: fadeInUp 1s ease forwards 0.3s;
                 max-width: none;
             }
 
-            .about-content {
-                flex-direction: column;
-            }
+            .about-content { flex-direction: column; gap: 2rem; }
+            .portfolio-grid { gap: 1rem; }
         }
     </style>
 </head>
@@ -914,7 +965,7 @@
         </div>
         <div class="portfolio-grid">
             <!-- Project 1 -->
-            <div class="portfolio-item animate delay-1">
+            <div class="portfolio-item animate delay-1" id="teaching">
                 <div class="portfolio-img">
                     <div class="image-container">
                         <img src="guru1.jpeg" alt="Image 1">
@@ -941,8 +992,8 @@
             <div class="portfolio-item animate delay-2">
                 <div class="portfolio-img">
                     <div class="image-container">
-                        <img src="gd1 (1).jpeg" alt="Image 1">
-                        <img src="gd1 (2).jpeg" alt="Image 2">
+                        <img src="gd (1).jpeg" alt="Image 1">
+                        <img src="gd (2).jpeg" alt="Image 2">
                         <img src="network-support.jpeg" alt="Image 3">
                         <img src="videografi.jpg" alt="Image 4">
                         <img src="m.jpg" alt="Image 5">
@@ -987,11 +1038,8 @@
             <div class="portfolio-item animate delay-4">
                 <div class="portfolio-img">
                     <div class="image-container">
-                        <img src="network-support.jpeg" alt="Image 1">
-                        <img src="gd.jpeg" alt="Image 2">
-                        <img src="photography.jpeg" alt="Image 3">
-                        <img src="videografi.jpg" alt="Image 4">
-                        <img src="m.jpg" alt="Image 5">
+                        <img src="gd 2 (2).jpeg" alt="Image 1">
+                        <img src="gd 2 (1).jpeg" alt="Image 2">
                     </div>
                 </div>
                 <div class="portfolio-info">
@@ -1006,26 +1054,20 @@
                 </div>
             </div>
 
-            <!-- Project 5 -->
-            <div class="portfolio-item animate delay-5">
-                <div class="portfolio-img">
-                    <div class="image-container">
-                        <img src="videografi.jpg" alt="Image 1">
-                        <img src="photography.jpeg" alt="Image 2">
-                        <img src="gd.jpeg" alt="Image 3">
-                        <img src="network-support.jpeg" alt="Image 4">
-                        <img src="m.jpg" alt="Image 5">
-                    </div>
-                </div>
+            <!-- Project 5 (Videography) - show only clickable text links -->
+            <div class="portfolio-item animate delay-5 portfolio-item--text">
                 <div class="portfolio-info">
                     <h3>Videography</h3>
-                    <p>Skilled in videography, creating engaging video content for various purposes.</p>
-                    <div class="portfolio-tags">
-                        <span>Videography</span>
-                        <span>Photography</span>
-                        <span>Media</span>
+                    <div class="project-links">
+                        <a href="https://www.youtube.com/watch?v=YE_6QKv3ZwE&t=97s" class="portfolio-project-link">Project 1</a>
+                        <a href="https://www.youtube.com/watch?v=QsSA2t00V90" class="portfolio-project-link">Project 2</a>
+                        <a href="https://www.youtube.com/watch?v=X0tuPBhkxFc" class="portfolio-project-link">Project 3</a>
+                        <a href="https://www.youtube.com/watch?v=zHVAvUpiPqE" class="portfolio-project-link">Project 4</a>
+                        <a href="https://www.youtube.com/watch?v=uBJpKg4PE9I&t=51s" class="portfolio-project-link">Project 5</a>
+                        <a href="https://www.tiktok.com/@wartabromo/video/7552709634570652940?is_from_webapp=1&sender_device=pc" class="portfolio-project-link">Project 6</a>
+                        <a href="https://vt.tiktok.com/ZSyXefPPN/" class="portfolio-project-link">Project 7</a>
+                        <a href="https://vt.tiktok.com/ZSyX8Kaqp/" class="portfolio-project-link">Project 8</a>
                     </div>
-                    <a href="#" class="portfolio-link">View Project</a>
                 </div>
             </div>
         </div>
@@ -1045,10 +1087,6 @@
                     <div class="contact-detail">
                         <i class="fas fa-envelope"></i>
                         <span>muhamadaniq23@gmail.com</span>
-                    </div>
-                    <div class="contact-detail">
-                        <i class="fas fa-phone"></i>
-                        <span>+62 895 1438 3733 </span>
                     </div>
                     <div class="contact-detail">
                         <i class="fas fa-map-marker-alt"></i>
@@ -1072,76 +1110,87 @@
     <!-- Footer -->
     <footer>
         <div class="social-links">
-            <a href="#"><i class="fab fa-facebook-f"></i></a>
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.facebook.com/profile.php?id=100004895387232&mibextid=rS40aB7S9Ucbxw6v" title="Facebook"><i class="fab fa-facebook-f" aria-hidden="true"></i></a>
+            <a href="https://www.instagram.com/iqmasi/" title="Instagram"><i class="fab fa-instagram" aria-hidden="true"></i></a>
+            <a href="https://www.linkedin.com/in/moch-aniq-saiful-islam-133a6b264?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="LinkedIn"><i class="fab fa-linkedin-in" aria-hidden="true"></i></a>
+            <a href="https://www.tiktok.com/@fgalunalunpasuruan" title="Tiktok"><i class="fa-brands fa-tiktok"></i></a>
         </div>
         <p>&copy; 2025 My Portfolio. All rights reserved.</p>
     </footer>
 
     <!-- Font Awesome for icons -->
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <!-- JavaScript -->
     <script>
-        // Mobile Menu Toggle
+        // Mobile Menu Toggle (better UX: prevent body scroll when open)
         const hamburger = document.querySelector('.hamburger');
         const navLinks = document.querySelector('.nav-links');
 
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
+        function toggleMobileMenu() {
+            const opened = hamburger.classList.toggle('active');
             navLinks.classList.toggle('active');
-        });
+            document.body.classList.toggle('no-scroll', opened);
+        }
 
-        // Close mobile menu when clicking a link
+        hamburger.addEventListener('click', toggleMobileMenu);
+
+        // Close mobile menu when clicking a link (also for internal project links)
         document.querySelectorAll('.nav-links a').forEach(link => {
             link.addEventListener('click', () => {
                 hamburger.classList.remove('active');
                 navLinks.classList.remove('active');
+                document.body.classList.remove('no-scroll');
             });
         });
 
-        // Scroll animations
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('animate');
-                }
-            });
-        }, {
-            threshold: 0.1
-        });
-
-        document.querySelectorAll('.animate').forEach(element => {
-            observer.observe(element);
-        });
-
-        // Smooth scrolling for anchor links
+        // Smooth scrolling for anchor links (fallback safe)
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
                 const target = document.querySelector(this.getAttribute('href'));
-                target.scrollIntoView({
-                    behavior: 'smooth'
-                });
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
             });
         });
 
-        // Dropdown toggle for mobile
-        const dropbtn = document.querySelector('.dropbtn');
-        const dropdownContent = document.querySelector('.dropdown-content');
+        // IntersectionObserver-driven reveal animations with optional stagger
+        const revealObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                const el = entry.target;
+                el.classList.add('is-visible');
+                // if element has .stagger, animate children sequentially by CSS delays
+                obs.unobserve(el);
+            });
+        }, { threshold: 0.12 });
 
-        dropbtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            dropdownContent.style.display = dropdownContent.style.display === 'block' ? 'none' : 'block';
+        // Observe elements marked to animate
+        document.querySelectorAll('[data-animate]').forEach(el => revealObserver.observe(el));
+
+        // Add data-animate attributes to common sections for default reveals
+        document.querySelectorAll('.section, .portfolio-item, .about-img, .portfolio-info, .contact-info').forEach((el) => {
+            if (!el.hasAttribute('data-animate')) el.setAttribute('data-animate', 'fade-up');
         });
 
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!dropbtn.contains(e.target) && !dropdownContent.contains(e.target)) {
-                dropdownContent.style.display = 'none';
-            }
+        // Dropdown toggle (desktop/mobile) - safe guards if missing
+        const dropbtn = document.querySelector('.dropbtn');
+        const dropdownContent = document.querySelector('.dropdown-content');
+        if (dropbtn && dropdownContent) {
+            dropbtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                dropdownContent.classList.toggle('open');
+            });
+            document.addEventListener('click', (e) => {
+                if (!dropbtn.contains(e.target) && !dropdownContent.contains(e.target)) {
+                    dropdownContent.classList.remove('open');
+                }
+            });
+        }
+
+        // Small helper: remove 'no-scroll' on resize to avoid stuck states
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) document.body.classList.remove('no-scroll');
         });
     </script>
 </body>
